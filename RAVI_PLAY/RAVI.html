@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAVIX: Capítulo 3 - Interactivo</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #2c3e50; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .comic-container { background: white; color: black; width: 400px; padding: 15px; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5); text-align: center; }
+        
+        /* AQUÍ ESTÁ LA CLAVE: El contenedor de tu diseño */
+        .vignette-frame {
+            width: 100%;
+            height: 350px;
+            background-color: #ddd; /* Color de fondo si no carga la imagen */
+            margin-bottom: 15px;
+            border: 2px solid #000;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Clase para que tus imágenes del PDF se ajusten bien */
+        .vignette-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Esto asegura que la imagen llene el cuadro */
+        }
+
+        .btn { padding: 10px 20px; font-size: 16px; cursor: pointer; margin: 5px; border: none; border-radius: 4px; }
+        .btn-danger { background-color: #e74c3c; color: white; }
+        .btn-success { background-color: #27ae60; color: white; }
+        
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="comic-container">
+    <div id="scene-1">
+        <h3>Capítulo 3: La vida no te da un segundo tiempo</h3>
+        <div class="vignette-frame">
+            <img src="dilan_apurado.jpg" alt="Dilan manejando rápido sin claxon"> 
+        </div>
+        <p>Dilan lleva prisa. Hay un cruce ciego adelante. ¿Qué haces?</p>
+        <button class="btn btn-danger" onclick="playScene('crash')">Acelerar (Tengo prisa)</button>
+        <button class="btn btn-success" onclick="playScene('safe')">Tocar Claxon y Frenar</button>
+    </div>
+
+    <div id="scene-crash" class="hidden">
+        <h3 style="color: #c0392b;">¡DILAN, NOOO!</h3>
+        <div class="vignette-frame">
+            <img src="casi_accidente.jpg" alt="Dilan casi atropella a Dimas">
+        </div>
+        <p>¡Casi provocas un accidente! No tocaste el claxon. [Regla de Oro violada]</p>
+        <button class="btn" onclick="location.reload()">Intentar de nuevo</button>
+    </div>
+
+    <div id="scene-safe" class="hidden">
+        <h3 style="color: #27ae60;">¡Bien hecho!</h3>
+        <div class="vignette-frame">
+            <img src="dilan_familia.jpg" alt="Dilan pensando en su hija">
+        </div>
+        <p>Tu familia te espera en casa. Operación segura completada.</p>
+        <button class="btn" onclick="alert('Badge Desbloqueado: Maquinista Responsable')">Recibir Badge</button>
+    </div>
+</div>
+
+<script>
+    function playScene(outcome) {
+        document.getElementById('scene-1').classList.add('hidden');
+        if(outcome === 'crash') {
+            document.getElementById('scene-crash').classList.remove('hidden');
+        } else {
+            document.getElementById('scene-safe').classList.remove('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>
